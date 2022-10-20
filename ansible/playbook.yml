@@ -1,0 +1,40 @@
+-
+    name: 'Install required packages'
+    hosts: localhost
+    vars:
+        packages:
+            - docker
+            - golang
+    tasks:
+        -
+            yum: 'name={{ packages }} state=present'
+
+-   name: "Start services"
+    hosts: localhost
+    tasks:
+        -
+          name: Enable Docker service
+          become: yes
+          shell: systemctl enable docker
+        -
+          name: Start Docker service
+          service:
+            name: docker
+            state: started
+
+-   name: "Application tasks"
+    hosts: localhost
+    tasks:
+        -
+          name: "Build docker image"
+          become: yes
+          shell: |
+            cd /ansible-playbooks/application
+            docker build -t my-go-app:1.0 .
+        -
+          name: "Run application docker container"
+          become: yes
+          shell: |
+            cd /ansible-playbooks/application
+            docker run -d --restart always --name challenge-app -p 8080:8080 my-go-app:1.0
+            curl http://localhost:8080
