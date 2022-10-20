@@ -62,7 +62,7 @@ resource "aws_security_group" "ec2_instance_ec2" {
     from_port        = 8080
     to_port          = 8080
     protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    cidr_blocks      = [local.vpc_cidr_block]
   }
 
   egress {
