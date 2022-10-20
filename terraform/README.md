@@ -1,3 +1,24 @@
+## How to deploy the code
+
+* Clone the repository to your computer.
+* Configure your <code>AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY</code> local variables.
+* All the inputs are configured in <code>main.tf</code> file as locals. You can use the default values or change them as your needs. 
+<br>(__IMPORTANT__): If you choose to use your own SSH keys, you must save the private key on <code>/terraform</code> folder and rename it to <code>challenge-key.pem</code>.</br>
+* Navigate to the terraform folder and run the terraform init command.
+<pre><code>terraform init</code></pre>
+* Run terraform apply command to deploy the resources.
+<pre><code>terraform apply</code></pre>
+* After all resources been deployed, you will receive outputs. Copy the URL of the <code>Cloudfront Distribution Domain Name</code>. This will be the URL to access the web application via HTTP and HTTPS.
+
+
+## How to update the binary
+
+* Log-in into the EC2 instance. To do that, follow these steps:
+  1. Get the IP Address in the output <code>Instance public IP</code>
+  2. Navigate to <code>terraform</code> folder
+  3. Run <code>ssh -i challenge-key.pem ec2-user@"IP-ADDRESS" -p 22022</code> Changing "IP-ADDRESS" by the instance's public IP.
+
+
 ## Requirements
 
 | Name | Version |
@@ -10,10 +31,6 @@
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.35.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
-
-## Modules
-
-No modules.
 
 ## Resources
 
