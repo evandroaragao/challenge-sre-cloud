@@ -68,10 +68,6 @@
 | [null_resource.ansible_playbooks](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [aws_ami.amazonlinux](https://registry.terraform.io/providers/hashicorp/aws/4.35.0/docs/data-sources/ami) | data source |
 
-## Inputs
-
-No inputs.
-
 ## Outputs
 
 | Name | Description |
